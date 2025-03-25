@@ -33,6 +33,8 @@ Se considera favorable una solución tecnológica basada en Internet de las Cosa
 **Figura 1. Diagrama de bloques sobre la arquitectura de la solución IoT**
 
 El presente diagrama permite visualizar la división de módulos en que se compone la solución IoT propuesta. Consiste, principalmente, en 3 capas dedicadas a la recolección de datos, procesamiento y actuación a partir de dicha información. La primera de ellas, la capa de recolección de información a partir del entorno se compone de un sensor **HC-SR04**, un ultrasónico que permite cuantificar distancias [1], empleado para medir la lejanía entre el nivel del agua y los límites definidos como permitidos, junto con un ‘raindrop sensor module’ [2], los cuales en este caso permiten determinar si la fuerza de la lluvia es algún signo de peligro de crecimiento en los niveles del agua o si la lluvia está siendo moderada. Los datos son recibidos y procesados mediante una **ESP32**, la cual tiene un servidor web embebido, el cual permite mostrar en tiempo real la distancia que tiene el nivel del agua con los limites definidos, y permite conocer la fuerza de la lluvia. Por último, se tiene el **Buzzer**, el cual es la alarma que suena una vez el agua alcanza o sobrepasa los limites dispuestos con la medición. Este buzzer puede ser activado y desactivado con el servidor web.
+![](https://github.com/Espiti88/Challenge-2-IoT/blob/main/DiagramaUML.png)
+**Figura 2. Diagrama UML sobre la arquitectura de la solución IoT**
 
 ## Restricciones de diseño identificadas
 
