@@ -13,12 +13,16 @@ Se considera favorable una solución tecnológica basada en Internet de las Cosa
    - Restricciones de diseño identificadas
    - Criterios de diseño
    - Estándares de ingeniería aplicados
+     
 2. **Desarrollo y evaluación del prototipo**
    - Configuración experimental
    - Resultados y Análisis
-   - Autoevaluación del protocolo  
+   - Autoevaluación del protocolo
+       
 3. **Conclusiones**
+   
 4. **Referencias**
+   
 5. **Anexos**
 
 ---
