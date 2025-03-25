@@ -15,15 +15,16 @@ Se considera favorable una solución tecnológica basada en Internet de las Cosa
    - Estándares de ingeniería aplicados
      
 2. **Desarrollo y evaluación del prototipo**
-   - Configuración experimental
+   - Acta de trabajo
+   - Configuración experimental 
    - Resultados y Análisis
    - Autoevaluación del protocolo
        
-3. **Conclusiones**
+4. **Conclusiones**
    
-4. **Referencias**
+5. **Referencias**
    
-5. **Anexos**
+6. **Anexos**
 
 ---
 
@@ -70,10 +71,11 @@ Una restricción técnica identificada en la fase de diseño consiste en la sens
 
 ## Desarrollo y evaluación del prototipo
 
-### Definición de roles
+### Acta de trabajo
 
-Se definieron unos roles a la hora de realizar la investigación de la información necesaria. Donde (no se si poner el nombre propio) uno se encargó de la realización del diseño, y los otros dos del código.
+Se definieron unos roles a la hora de realizar el trabajo, dependiendo las tareas asignadas, las cuales se pueden ver en la imagen  
 
+Las primeras 3 actividades se realizaron durante la semana del 12 al 19 de marzo, ya que eran las bases para poder realizar correctamente el desafío. Durante los días del 19 al 21 de marzo, se realizaron las ultimas 2 actividades, donde el día 21 de marzo, el desafío presento el correcto funcionamiento, dando por finalizado el proceso.  
 ### Configuración experimental
 
 En base al desafío anterior, ya se tenían seleccionados los materiales necesarios. Luego era necesario realizar la fase de ideación donde se definió la mejor manera en la que se podrían mostrar los datos obtenidos por los sensores mediante los dashboards, y la mejor manera de realizarlos. Se llego a la conclusión de que la mejor manera de realizar esto era utilizando una ESP32, la cual permite la conexión wifi y la creación de un servidor web embebido. Al estar trabajando anteriormente con un Arduino, era necesario realizar el cambio en la simulación de un Arduino a una ESP32, la cual se realizó en Wowki. Esto permitía saber la manera en que los componentes se podían conectar a la ESP32 y la verificación de su funcionamiento. Una vez se verifico la simulación, se realizaron las conexiones de los componentes de manera física, y se utilizó una maqueta que simula el crecimiento de un rio
