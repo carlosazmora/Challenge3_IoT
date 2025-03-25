@@ -8,18 +8,18 @@ Se considera favorable una solución tecnológica basada en Internet de las Cosa
 
 ## Estructura del documento
 
-1. Solución Propuesta
-2. Arquitectura propuesta
-3. Restricciones de diseño identificadas
-4. Criterios de diseño
-5. Estándares de ingeniería aplicados
-6. Desarrollo y evaluación del prototipo
-7. Configuración experimental
-8. Resultados y Análisis
-9. Autoevaluación del protocolo
-10. Conclusiones
-11. Referencias
-12. Anexos
+1. **Solución Propuesta**
+   - Arquitectura propuesta
+   - Restricciones de diseño identificadas
+   - Criterios de diseño
+   - Estándares de ingeniería aplicados
+2. **Desarrollo y evaluación del prototipo**
+   - Configuración experimental
+   - Resultados y Análisis
+   - Autoevaluación del protocolo  
+3. **Conclusiones**
+4. **Referencias**
+5. **Anexos**
 
 ---
 
