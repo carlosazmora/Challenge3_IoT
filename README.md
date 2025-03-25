@@ -75,6 +75,7 @@ Una restricción técnica identificada en la fase de diseño consiste en la sens
 
 Se definieron unos roles a la hora de realizar el trabajo, dependiendo las tareas asignadas, las cuales se pueden ver en la imagen  
 ![](https://github.com/Espiti88/Challenge-2-IoT/blob/main/imagen_2025-03-25_185033150.png)
+
 Las primeras 3 actividades se realizaron durante la semana del 12 al 19 de marzo, ya que eran las bases para poder realizar correctamente el desafío. Durante los días del 19 al 21 de marzo, se realizaron las ultimas 2 actividades, donde el día 21 de marzo, el desafío presento el correcto funcionamiento, dando por finalizado el proceso.  
 ### Configuración experimental
 
