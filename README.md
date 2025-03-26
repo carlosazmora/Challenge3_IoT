@@ -131,3 +131,182 @@ La solución propuesta cumple con los requerimientos técnicos planteados por el
 [4] “ISO 9001 Sistemas de Gestión de la Calidad | Normas ISO”. Normas ISO | Normas ISO Asesoría y Formación en Sistemas de Gestión. Accedido el 17 de febrero de 2025. [En línea]. Disponible: https://www.normas-iso.com/iso-9001/ 
 
 [5] “UNE-EN ISO 4373:2022 Hidrometría. Dispositivos de medida del n...” UNE - Asociación Española de Normalización. Accedido el 17 de febrero de 2025. [En línea]. Disponible: https://www.une.org/encuentra-tu-norma/busca-tu-norma/norma/?c=N0070707 
+
+---
+
+## Anexos
+#include <WiFi.h>
+#include <WebServer.h>
+
+const char* ssid = "REALME";
+const char* password = "IoTplsdeja";
+
+#define RAIN_SENSOR_PIN 34
+#define LED_PIN 2
+#define TRIG_PIN 5
+#define ECHO_PIN 18
+#define BUZZER_PIN 19
+
+const float water_level = 10.0;
+int isRaining = 100;
+int value = 1000;
+bool alarmaActiva = true; 
+
+WebServer server(80);
+
+#define HISTORICO_SIZE 10
+float historicoDistancias[HISTORICO_SIZE] = {0.0};
+String historicoLluvia[HISTORICO_SIZE] = {"N/A"};
+int historicoIndex = 0;
+
+float distanciaActual = 0.0;
+String lluviaActual = "No hay lluvia :-)";
+
+float medirDistancia() {
+    digitalWrite(TRIG_PIN, LOW);
+    delayMicroseconds(2);
+    digitalWrite(TRIG_PIN, HIGH);
+    delayMicroseconds(10);
+    digitalWrite(TRIG_PIN, LOW);
+    long duration = pulseIn(ECHO_PIN, HIGH);
+    return (duration * 0.0343) / 2;
+}
+
+void agregarAlHistorico(float distancia, String lluvia) {
+    historicoDistancias[historicoIndex] = distancia;
+    historicoLluvia[historicoIndex] = lluvia;
+    historicoIndex = (historicoIndex + 1) % HISTORICO_SIZE;
+}
+
+void verificarBuzzer(float distancia) {
+    if (distancia <= water_level && alarmaActiva) {
+        tone(BUZZER_PIN, 523, 500);
+        delay(500);
+        Serial.println("ALERTA: Nivel de agua bajo!");
+    } else {
+        noTone(BUZZER_PIN);
+    }
+}
+
+void handleRoot() {
+    String html = "<html><head>";
+    html += "<meta http-equiv='refresh' content='2'>";
+    html += "<style>";
+    html += "body { font-family: Arial, sans-serif; background-color: #e0f7fa; margin: 0; padding: 0; }";
+    html += "h1 { background-color: #0288d1; color: white; padding: 20px; margin: 0; text-align: center; }";
+    html += "p { font-size: 1.5rem; color: #333; }"; 
+    html += "button { background-color: #4caf50; color: white; border: none; padding: 10px 20px; font-size: 1.1rem; border-radius: 5px; margin: 10px; cursor: pointer; }";
+    html += "button:hover { background-color: #45a049; }"; 
+    html += "table { width: 80%; margin: 20px auto; border-collapse: collapse; background-color: white; border: 1px solid #ccc; }"; 
+    html += "th, td { padding: 15px; text-align: center; border: 1px solid #ccc; }"; 
+    html += "th { background-color: #0288d1; color: white; }"; 
+    html += "tr:nth-child(even) { background-color: #f2f2f2; }"; 
+    html += "</style>";
+    html += "</head><body>";
+
+    html += "<h1>Datos del Sensor - Sistema de Alerta</h1>";
+
+    html += "<div style='text-align:center; padding: 20px;'>";
+    html += "<p><strong>Distancia:</strong> " + String(distanciaActual) + " cm</p>";
+    html += "<p><strong>Estado de lluvia:</strong> " + lluviaActual + "</p>";
+
+    if (distanciaActual <= water_level) {
+        if (lluviaActual == "Lluvia re fuerte :(" || lluviaActual == "Lluvia mas o menos :|") {
+            html += "<h2 style='color: red;'>Inundacion por lluvias intensas</h2>";
+        } else {
+            html += "<h2 style='color: orange;'>Inundacion por otras razones </h2>";
+        }
+    } else {
+        html += "<h2 style='color: green;'>No hay riesgo de inundacion</h2>";
+    }
+
+    html += "<button onclick=\"apagarAlarma()\">Apagar Alarma</button>";
+    html += "<button onclick=\"encenderAlarma()\">Encender Alarma</button>";
+    html += "</div>";
+
+    html += "<script>";
+    html += "function apagarAlarma() { fetch('/apagar'); alert('Alarma desactivada.'); }";
+    html += "function encenderAlarma() { fetch('/encender'); alert('Alarma activada.'); }";
+    html += "</script>";
+
+    html += "<h2 style='text-align: center;'>Historico de Datos</h2>";
+    html += "<table>";
+    html += "<tr><th>Numero</th><th>Distancia (cm)</th><th>Estado de Lluvia</th></tr>";
+
+    for (int i = 0; i < HISTORICO_SIZE; i++) {
+        int index = (historicoIndex + i) % HISTORICO_SIZE;
+        html += "<tr>";
+        html += "<td>" + String(i + 1) + "</td>";
+        html += "<td>" + (historicoDistancias[index] != 0.0 ? String(historicoDistancias[index], 2) : "N/A") + "</td>";
+        html += "<td>" + (historicoLluvia[index] != "" ? historicoLluvia[index] : "N/A") + "</td>";
+        html += "</tr>";
+    }
+
+    html += "</table>";
+    html += "</body></html>";
+
+    server.send(200, "text/html", html);
+}
+
+void handleApagar() {
+    alarmaActiva = false;
+    Serial.println("Alarma apagada desde la página web.");
+    server.send(200, "text/plain", "Alarma desactivada.");
+}
+
+void handleEncender() {
+    alarmaActiva = true;
+    Serial.println("Alarma encendida desde la página web.");
+    server.send(200, "text/plain", "Alarma activada.");
+}
+
+void setup() {
+    Serial.begin(9600);
+    pinMode(RAIN_SENSOR_PIN, INPUT);
+    pinMode(TRIG_PIN, OUTPUT);
+    pinMode(ECHO_PIN, INPUT);
+    pinMode(BUZZER_PIN, OUTPUT);
+    pinMode(LED_PIN, OUTPUT);
+
+    WiFi.begin(ssid, password);
+    Serial.print("Conectando a WiFi...");
+    while (WiFi.status() != WL_CONNECTED) {
+        delay(500);
+        Serial.print(".");
+    }
+    Serial.println("\nConectado a WiFi!");
+    Serial.println(WiFi.localIP());
+
+    server.on("/", handleRoot);
+    server.on("/apagar", handleApagar);
+    server.on("/encender", handleEncender);
+    server.begin();
+
+    xTaskCreate(tareaMedirDistancia, "MedirDistancia", 1000, NULL, 1, NULL);
+    xTaskCreate(tareaCheckRain, "CheckRain", 1000, NULL, 1, NULL);
+}
+
+void tareaMedirDistancia(void* parameter) {
+    for (;;) {
+        distanciaActual = medirDistancia();
+        verificarBuzzer(distanciaActual);
+        agregarAlHistorico(distanciaActual, lluviaActual);
+        delay(500);
+    }
+}
+
+void tareaCheckRain(void* parameter) {
+    for (;;) {
+        value = analogRead(RAIN_SENSOR_PIN);
+        if (value < 300) isRaining = true;
+        else isRaining = false;
+
+        lluviaActual = (value < 1600) ? "Lluvia re fuerte :(" : (value < 2800) ? "Lluvia mas o menos :|" : "No hay lluvia";
+        digitalWrite(LED_PIN, isRaining);
+        delay(100);
+    }
+}
+
+void loop() {
+    server.handleClient();
+}
