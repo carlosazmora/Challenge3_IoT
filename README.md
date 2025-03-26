@@ -1,8 +1,8 @@
 # Challenge 2
 
 ## Integrantes
-Samuel Espitia
-Miguel Ángel Feo
+Samuel Espitia  
+Miguel Ángel Feo  
 Carlos Zuluaga
 
 ## Resumen general
