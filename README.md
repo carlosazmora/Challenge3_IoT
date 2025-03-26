@@ -32,7 +32,7 @@ Se considera favorable una solución tecnológica basada en Internet de las Cosa
 ![](https://github.com/Espiti88/Challenge-2-IoT/blob/main/SolucionPropuesta.png)
 **Figura 1. Diagrama de bloques sobre la arquitectura de la solución IoT**
 
-El presente diagrama permite visualizar la división de módulos en que se compone la solución IoT propuesta. Consiste, principalmente, en 3 capas dedicadas a la recolección de datos, procesamiento y actuación a partir de dicha información. La primera de ellas, la capa de recolección de información a partir del entorno se compone de un sensor **HC-SR04**, un ultrasónico que permite cuantificar distancias [1], empleado para medir la lejanía entre el nivel del agua y los límites definidos como permitidos, junto con un ‘raindrop sensor module’ [2], los cuales en este caso permiten determinar si la fuerza de la lluvia es algún signo de peligro de crecimiento en los niveles del agua o si la lluvia está siendo moderada. Los datos son recibidos y procesados mediante una **ESP32**, la cual tiene un servidor web embebido, el cual permite mostrar en tiempo real la distancia que tiene el nivel del agua con los limites definidos, y permite conocer la fuerza de la lluvia. Por último, se tiene el **Buzzer**, el cual es la alarma que suena una vez el agua alcanza o sobrepasa los limites dispuestos con la medición. Este buzzer puede ser activado y desactivado con el servidor web.
+El presente diagrama permite visualizar la división de módulos en que se compone la solución IoT propuesta. Consiste, principalmente, en 3 capas dedicadas a la recolección de datos, procesamiento y actuación a partir de dicha información. La primera de ellas, la capa de recolección de información a partir del entorno se compone de un sensor **HC-SR04**, un ultrasónico que permite cuantificar distancias [1], empleado para medir la lejanía entre el nivel del agua y los límites definidos como permitidos, junto con un ‘raindrop sensor module’ [2], los cuales en este caso permiten determinar si la fuerza de la lluvia es algún signo de peligro de crecimiento en los niveles del agua o si la lluvia está siendo moderada. Los datos son recibidos y procesados mediante una **ESP32**, la cual tiene un servidor web embebido [3], el cual permite mostrar en tiempo real la distancia que tiene el nivel del agua con los limites definidos, y permite conocer la fuerza de la lluvia. Por último, se tiene el **Buzzer**, el cual es la alarma que suena una vez el agua alcanza o sobrepasa los limites dispuestos con la medición. Este buzzer puede ser activado y desactivado con el servidor web.
 ![](https://github.com/Espiti88/Challenge-2-IoT/blob/main/DiagramaUML.png)
 **Figura 2. Diagrama UML sobre la arquitectura de la solución IoT**
 
@@ -118,3 +118,16 @@ El proceso de prototipado de la presente solución presento varias dificultades 
 La incorporación de la **ESP32** como microcontrolador central, junto con un servidor web embebido, permitió optimizar el diseño y ampliar la funcionalidad del sistema mediante un dashboard accesible desde cualquier dispositivo conectado a la red. Este dashboard mejora significativamente la experiencia del usuario al presentar de forma clara y visual los datos obtenidos por los sensores
 
 La solución propuesta cumple con los requerimientos técnicos planteados por el docente y constituye una sólida propuesta de solución para la problemática del reto, permitiendo la medición del nivel de altura del agua, así como la detección de lluvias, con el fin de fortalecer los protocolos de prevención de desastres, además de permitir la visualización de los datos mediante un dashboard alojado en un servidor embebido. Lo que va a generar mejoras a la hora de tomar precauciones ante los desastres de la comunidad
+
+---
+
+## Referencias
+[1] Androbot TECH. Utiliza este Sensor para medir el nivel de agua! (28 de junio de 2022). Accedido el 17 de febrero de 2025. [Video en línea]. Disponible: https://www.youtube.com/watch?v=VobYZbzTXzc 
+
+[2] “RAIN SENSOR Tutorial | RAIN SENSOR with Arduino Uno - SriTu Hobby”. SriTu Hobby. Accedido el 17 de febrero de 2025. [En línea]. Disponible: https://srituhobby.com/rain-sensor-tutorial-rain-sensor-with-arduino-uno/ 
+
+[3[“Servidor web con ESP32”. Programarfacil Arduino y Home Assistant. Accedido el 26 de marzo de 2025. [En línea]. Disponible: https://programarfacil.com/esp32/servidor-web-con-esp32/ 
+
+[4] “ISO 9001 Sistemas de Gestión de la Calidad | Normas ISO”. Normas ISO | Normas ISO Asesoría y Formación en Sistemas de Gestión. Accedido el 17 de febrero de 2025. [En línea]. Disponible: https://www.normas-iso.com/iso-9001/ 
+
+[5] “UNE-EN ISO 4373:2022 Hidrometría. Dispositivos de medida del n...” UNE - Asociación Española de Normalización. Accedido el 17 de febrero de 2025. [En línea]. Disponible: https://www.une.org/encuentra-tu-norma/busca-tu-norma/norma/?c=N0070707 
