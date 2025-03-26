@@ -1,5 +1,10 @@
 # Challenge 2
 
+## Integrantes
+Samuel Espitia
+Miguel Ángel Feo
+Carlos Zuluaga
+
 ## Resumen general
 
 Colombia es un país caracterizado por su variada topografía y patrones climáticos variados. Esta variedad combinada con fenómenos climáticos como La Niña, incrementa significativamente la vulnerabilidad del país a crecidas de ríos e inundaciones, afectando gravemente a comunidades y generando daños a la infraestructura. Frente a este panorama, la detección temprana de crecidas se convierte en un pilar fundamental para la gestión del riesgo de desastres, enfoque que se decidió adoptar en el desarrollo de un proyecto para la clase de Internet de las Cosas.
@@ -33,8 +38,12 @@ Se considera favorable una solución tecnológica basada en Internet de las Cosa
 **Figura 1. Diagrama de bloques sobre la arquitectura de la solución IoT**
 
 El presente diagrama permite visualizar la división de módulos en que se compone la solución IoT propuesta. Consiste, principalmente, en 3 capas dedicadas a la recolección de datos, procesamiento y actuación a partir de dicha información. La primera de ellas, la capa de recolección de información a partir del entorno se compone de un sensor **HC-SR04**, un ultrasónico que permite cuantificar distancias [1], empleado para medir la lejanía entre el nivel del agua y los límites definidos como permitidos, junto con un ‘raindrop sensor module’ [2], los cuales en este caso permiten determinar si la fuerza de la lluvia es algún signo de peligro de crecimiento en los niveles del agua o si la lluvia está siendo moderada. Los datos son recibidos y procesados mediante una **ESP32**, la cual tiene un servidor web embebido [3], el cual permite mostrar en tiempo real la distancia que tiene el nivel del agua con los limites definidos, y permite conocer la fuerza de la lluvia. Por último, se tiene el **Buzzer**, el cual es la alarma que suena una vez el agua alcanza o sobrepasa los limites dispuestos con la medición. Este buzzer puede ser activado y desactivado con el servidor web.
+
 ![](https://github.com/Espiti88/Challenge-2-IoT/blob/main/DiagramaUML.png)
 **Figura 2. Diagrama UML sobre la arquitectura de la solución IoT**
+
+**Escala**
+Para la demostración de la solución, se tomó como referencia el estrecho del río Magdalena, ubicado en el municipio de San Agustín, Huila, cuya profundidad aproximada es de 15 metros. En la maqueta, se planteó una escala de 1 cm por cada 2 metros reales. Bajo esta escala, se definió como nivel crítico aquel en el que el agua se encuentra a 3 cm de distancia del sensor.
 
 ## Restricciones de diseño identificadas
 
