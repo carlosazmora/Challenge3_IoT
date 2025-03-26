@@ -83,6 +83,8 @@ Las primeras 3 actividades se realizaron durante la semana del 12 al 19 de marzo
 
 En base al desafío anterior, ya se tenían seleccionados los materiales necesarios. Luego era necesario realizar la fase de ideación donde se definió la mejor manera en la que se podrían mostrar los datos obtenidos por los sensores mediante los dashboards, y la mejor manera de realizarlos. Se llego a la conclusión de que la mejor manera de realizar esto era utilizando una ESP32, la cual permite la conexión wifi y la creación de un servidor web embebido. Al estar trabajando anteriormente con un Arduino, era necesario realizar el cambio en la simulación de un Arduino a una ESP32, la cual se realizó en Wowki. Esto permitía saber la manera en que los componentes se podían conectar a la ESP32 y la verificación de su funcionamiento. Una vez se verifico la simulación, se realizaron las conexiones de los componentes de manera física, y se utilizó una maqueta que simula el crecimiento de un rio
 
+![](https://github.com/Espiti88/Challenge-2-IoT/blob/main/imagen_2025-03-25_190221235.png)
+
 Junto con las conexiones, se realizó simultáneamente la programación para el servidor web embebido que permitía mostrar los datos obtenidos del hardware, mediante un dashboard. Este dashboard mostraba la distancia entre el agua y el límite establecido, y también mostraba la fuerza de la lluvia, además de mostrar un histórico de los últimos 10 datos capturados. Además de permitir la activación y desactivación de la alarma.
 
 ---
