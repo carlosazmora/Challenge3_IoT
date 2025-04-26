@@ -90,25 +90,27 @@ Una restricción técnica identificada en la fase de diseño consiste en la sens
 ### Acta de trabajo
 
 Se definieron unos roles a la hora de realizar el trabajo, dependiendo las tareas asignadas, las cuales se pueden ver en la imagen  
-![](https://github.com/Espiti88/Challenge-2-IoT/blob/main/imagen_2025-03-25_185033150.png)
+![](https://github.com/carlosazmora/Challenge3_IoT/blob/5a11d4342af9decd64cc685f696b9dea135ef5a1/ListaDeTareas.jpg)
 
-Las primeras 3 actividades se realizaron durante la semana del 12 al 19 de marzo, ya que eran las bases para poder realizar correctamente el desafío. Durante los días del 19 al 21 de marzo, se realizaron las ultimas 2 actividades, donde el día 21 de marzo, el desafío presento el correcto funcionamiento, dando por finalizado el proceso.  
+Para el desarrollo del proyecto, inicialmente se investigó cómo utilizar el protocolo MQTT, comprendiendo su funcionamiento y su importancia en la comunicación IoT. Posteriormente, se procedió a instalar y configurar la Raspberry Pi, preparando el entorno necesario para su operación como gateway. Con la infraestructura básica lista, se modificó el código de la ESP32 para permitir su conexión adecuada con la Raspberry Pi. Paralelamente, se codificó la Raspberry Pi para que pudiera actuar como intermediario entre la ESP32 y la nube, gestionando el tráfico de datos. Una vez establecida esta funcionalidad, se realizó la conexión entre la Raspberry Pi y la plataforma Ubidots, asegurando que los datos transmitidos fueran correctamente recibidos y almacenados. Para visualizar los datos de manera clara y en tiempo real, se creó un dashboard en Ubidots adaptado a las necesidades del proyecto. Finalmente, se llevaron a cabo las conexiones finales y las pruebas de integración, verificando el correcto funcionamiento de todo el sistema de comunicación de extremo a extremo.
+
 ### Configuración experimental
 
-En base al desafío anterior, ya se tenían seleccionados los materiales necesarios. Luego era necesario realizar la fase de ideación donde se definió la mejor manera en la que se podrían mostrar los datos obtenidos por los sensores mediante los dashboards, y la mejor manera de realizarlos. Se llego a la conclusión de que la mejor manera de realizar esto era utilizando una ESP32, la cual permite la conexión wifi y la creación de un servidor web embebido. Al estar trabajando anteriormente con un Arduino, era necesario realizar el cambio en la simulación de un Arduino a una ESP32, la cual se realizó en Wowki. Esto permitía saber la manera en que los componentes se podían conectar a la ESP32 y la verificación de su funcionamiento. Una vez se verifico la simulación, se realizaron las conexiones de los componentes de manera física, y se utilizó una maqueta que simula el crecimiento de un rio
+Basándose en el reto anterior, ya se tenían seleccionados los materiales necesarios. Luego era necesario realizar la fase de ideación donde se definió la mejor manera en la que se podrían enviar los datos recolectados con la ESP32, y se tuvo que buscar la forma para enviarlos a alguna plataforma en la nube que en este caso fue Ubidots. Principalmente se siguió la simulación del último desafío ya que tenía la misma funcionalidad, y en este caso se tuvo que realizar la configuración de la Raspberry Pi y la codificación de su funcionamiento para que esta actuara como Gateway de MQTT. 
+
+Una vez se podían comunicar la ESP32 con la Raspberry Pi, se tuvo que conectar la Raspberry con Ubidots para que se mostraran los datos recolectados y los mismos pudiesen ser monitoreados. En Ubidots se mostraba la distancia entre el agua y el límite establecido, junto con el estado de la lluvia, además de permitir activar y desactivar la alarma de alerta. 
+
+Para mostrar estos datos fue necesario crear una base de datos que almacenara esta información, permitiendo de esta manera guardarlos en caso de que se requiera un histórico de datos, además de permitir la visualización por medio de un gráfico las ultimas distancias de agua, ayudando a saber en qué estado esta y ha estado el nivel del agua. 
 
 ![](https://github.com/Espiti88/Challenge-2-IoT/blob/main/imagen_2025-03-25_190221235.png)
-
-Junto con las conexiones, se realizó simultáneamente la programación para el servidor web embebido que permitía mostrar los datos obtenidos del hardware, mediante un dashboard. Este dashboard mostraba la distancia entre el agua y el límite establecido, y también mostraba la fuerza de la lluvia, además de mostrar un histórico de los últimos 10 datos capturados. Además de permitir la activación y desactivación de la alarma.
 
 ---
 
 ## Resultados
 
-Comprobar el funcionamiento del sistema era de vital importancia. Para lo cual, se posicionó el sensor de lluvia sobre un recipiente, y se le regaba agua para funcionar como una simulación de lluvia, verificando su funcionamiento prendiendo un led de emergencia y mostrando el estado de la lluvia en el dashboard. Utilizando este recipiente también se verifico el funcionamiento del sensor, una vez el nivel del agua estaba muy cerca al límite definido, el sensor detectaba que tan cerca estaba el agua del límite, permitiendo enviar el dato a la ESP32, la cual mandaba los datos también al servidor web. Además, se encendía el buzzer el cual avisaba, y se podía manipular su estado de encendido y apagado mediante el servidor web.
+Comprobar el funcionamiento del sistema era de vital importancia. Para lo cual, se posicionó el sensor de lluvia sobre un recipiente, y se le regaba agua para funcionar como una simulación de lluvia, verificando su funcionamiento prendiendo un led de emergencia y mostrando el estado de la lluvia en el dashboard. Utilizando este recipiente también se verifico el funcionamiento del sensor, una vez el nivel del agua estaba muy cerca al límite definido, el sensor detectaba que tan cerca estaba el agua del límite, permitiendo enviar el dato a la ESP32, la cual mandaba los datos a la Raspberry Pi, la cual permitía mandarlos a Ubidots y de esta manera mostrarlos. Además, se encendía el buzzer el cual avisaba, y se podía manipular su estado de encendido y apagado mediante la plataforma. 
 
-Se obtuvo que todos los componentes funcionaron de manera correcta y conforme a lo esperado. El sensor ultrasónico **HC-SR04** permitió detectar de manera precisa el nivel del agua, cumpliendo con la función principal de la solución. El sensor de lluvia también mostró un rendimiento eficiente, logrando captar de forma efectiva la presencia de lluvia y contribuyendo a la implementación de medidas preventivas en el proyecto. La **ESP32** fue utilizada con éxito como microcontrolador principal, logrando la comunicación adecuada entre todos los componentes y permitiendo el envío de datos en tiempo real al servidor web embebido. A través del dashboard del servidor, se visualizaron correctamente los datos relevantes sobre el nivel del agua y la presencia de lluvia, lo que facilitó la interpretación y monitoreo del sistema. Finalmente, el buzzer y el LED funcionaron de manera óptima, generando alertas sonoras cuando se detectaba un nivel de agua crítico o lluvias moderadas y fuertes.
-
+Se obtuvo que todos los componentes funcionaron de manera correcta y conforme a lo esperado. El sensor ultrasónico HC-SR04 permitió detectar de manera precisa el nivel del agua, cumpliendo con la función principal de la solución. El sensor de lluvia también mostró un rendimiento eficiente, logrando captar de forma efectiva la presencia de lluvia y contribuyendo a la implementación de medidas preventivas en el proyecto. La ESP32 fue utilizada con éxito como microcontrolador principal, logrando la comunicación adecuada entre todos los componentes y permitiendo el envío de datos utilizando MQTT por medio del Gateway representado por la Raspberry Pi. A través de Ubidots, se logró ver correctamente los datos relevantes sobre el nivel del agua y la presencia de lluvia, lo que facilitó la interpretación y monitoreo del sistema. Finalmente, el buzzer y el LED funcionaron de manera óptima, generando alertas sonoras cuando se detectaba un nivel de agua crítico o lluvias moderadas y fuertes. 
 ---
 
 ## Autoevaluación del protocolo de pruebas
@@ -117,21 +119,21 @@ El desarrollo del prototipo IoT para la detección temprana de crecidas en ríos
 
 Para cumplir con estos requerimientos, se implementó un sensor ultrasónico **HC-SR04**, el cual permitió medir la distancia entre el nivel del agua y un límite crítico definido. Junto a este, se utilizó un sensor de lluvia que detectó la presencia e intensidad de precipitaciones, activando un LED de alerta cuando estas alcanzaban niveles moderados o fuertes. La información de ambos sensores fue procesada mediante una **ESP32**, que activaba un buzzer para emitir una alarma sonora en caso de niveles críticos de agua. Estos elementos permitieron la notificación in situ requerida en el planteamiento del problema.
 
-Más allá de cumplir con los requisitos mínimos, se incorporaron mejoras adicionales que aumentaron la funcionalidad del sistema. La solución no solo detecta cuando el agua alcanza un nivel crítico, sino que también permite monitorear cómo evoluciona la crecida, proporcionando datos sobre cuánto ha aumentado el nivel del río en un período de tiempo. Esta capacidad amplía el alcance del sistema, permitiendo un análisis del comportamiento del río que puede ser utilizada para detectar posibles desbordamientos con una antelación aún mayor. Además, se implementó un dashboard el cual permite ver los datos obtenidos por los sensores, proporcionando información diferenciada sobre la situación del río y factores que pueden afectarlo, como lo son las precipitaciones.
+Más allá de cumplir con los requisitos mínimos, se incorporaron mejoras adicionales que aumentaron la funcionalidad del sistema. La solución no solo detecta cuando el agua alcanza un nivel crítico, sino que también permite monitorear cómo evoluciona la crecida, proporcionando datos sobre cuánto ha aumentado el nivel del río en un período de tiempo. Esta capacidad amplía el alcance del sistema, permitiendo un análisis del comportamiento del río que puede ser utilizada para detectar posibles desbordamientos con una antelación aún mayor. Además, se implementó un dashboard alojado en nube que permite ver los valores registrados por los sensores, proporcionando información diferenciada sobre la situación del río y factores que pueden afectarlo, como lo son las precipitaciones.
 
-Entre las oportunidades de mejora identificadas, se encuentra la necesidad de desarrollar una protección adecuada para los componentes electrónicos expuestos a condiciones climáticas adversas, garantizando su durabilidad en aplicaciones reales. También se plantea un monitoreo que permita mostrar los datos de manera más rápida y eficiente, que permita asimilarse a un monitoreo en tiempo real para el usuario.
+Entre las oportunidades de mejora identificadas, se encuentra la necesidad de desarrollar una protección adecuada para los componentes electrónicos expuestos a condiciones climáticas adversas, garantizando su durabilidad en aplicaciones reales. También se plantea un monitoreo que permita mostrar los datos de manera más rápida y eficiente, que permita asimilarse a un monitoreo en tiempo real para el usuario, además de la implementación de algún dispositivo que permita dar la misma conexión a la raspberry y al circuito con el fin de que pueda funcionar en cualquier momento. 
 
-En conclusión, el sistema desarrollado cumplió con los requisitos mínimos del reto al ofrecer un monitoreo en tiempo real de las crecidas y una notificación local efectiva en caso de riesgo, junto con un tablero que permitía ver los datos recolectados por los sensores. Además, las mejoras implementadas y las oportunidades de optimización identificadas posicionan esta solución como un sistema prometedor para minimizar los daños causados por inundaciones en Colombia.
+En conclusión, el sistema desarrollado cumplió con los requisitos mínimos del reto al ofrecer un monitoreo en tiempo real de las crecidas y una notificación local efectiva en caso de riesgo, junto con un tablero que permite ver los datos recolectados por los sensores. Además, las mejoras implementadas y las oportunidades de optimización identificadas posicionan esta solución como un sistema prometedor para minimizar los daños causados por inundaciones en Colombia.
 
 ---
 
 ## Conclusiones
 
-El proceso de prototipado de la presente solución presento varias dificultades al no tener conocimientos sobre cómo se utilizan los hilos en un contexto practico de IoT. Sin embargo, se logró aplicar este término en el proyecto
+El proceso de prototipado de la presente solución presento varias dificultades al no tener conocimientos sobre como enviar datos de una ESP32 a una Raspberry Pi por medio de MQTT. Sin embargo, se logró realizar esta comunicación de datos de la manera correcta 
 
-La incorporación de la **ESP32** como microcontrolador central, junto con un servidor web embebido, permitió optimizar el diseño y ampliar la funcionalidad del sistema mediante un dashboard accesible desde cualquier dispositivo conectado a la red. Este dashboard mejora significativamente la experiencia del usuario al presentar de forma clara y visual los datos obtenidos por los sensores
+La incorporación de la **ESP32** como microcontrolador central permitió optimizar el diseño y ampliar la funcionalidad del sistema permitiendo su conexión a la red. De esta manera se transmitían los datos a l raspberry y posteriormente se permitía mostrar la información en el dashboard. Además, se permitió guardar los datos en una base de datos. 
 
-La solución propuesta cumple con los requerimientos técnicos planteados por el docente y constituye una sólida propuesta de solución para la problemática del reto, permitiendo la medición del nivel de altura del agua, así como la detección de lluvias, con el fin de fortalecer los protocolos de prevención de desastres, además de permitir la visualización de los datos mediante un dashboard alojado en un servidor embebido. Lo que va a generar mejoras a la hora de tomar precauciones ante los desastres de la comunidad
+La solución propuesta cumple con los requerimientos técnicos planteados por el docente y constituye una sólida propuesta de solución para la problemática del reto, permitiendo la medición del nivel de altura del agua, así como la detección de lluvias, con el fin de fortalecer los protocolos de prevención de desastres, además de permitir la visualización de los datos mediante un dashboard alojado en la nube lo que facilitara a las autoridades a realizar un monitoreo más eficiente. Lo que va a generar mejoras a la hora de tomar precauciones ante los desastres de la comunidad   
 
 ---
 
@@ -149,14 +151,163 @@ La solución propuesta cumple con los requerimientos técnicos planteados por el
 ---
 
 ## Anexos
-### Código fuente documentado
+### Código fuente - Raspberry
+
+```cpp
+import sqlite3
+import json
+import paho.mqtt.client as mqtt
+import paho.mqtt.publish as publish
+from datetime import datetime
+
+# SQLite
+DB_NAME = "sensores.db"
+
+# MQTT Local
+LOCAL_MQTT_BROKER = "localhost"
+LOCAL_MQTT_TOPIC_NIVEL = "rio/nivel"
+LOCAL_MQTT_TOPIC_LLUVIA = "rio/lluvia"
+LOCAL_MQTT_TOPIC_LED = "esp32/control_alarma"  # Topic para controlar el LED en la ESP32
+
+# MQTT Ubidots
+UBIDOTS_BROKER = "industrial.api.ubidots.com"
+UBIDOTS_PORT = 1883
+UBIDOTS_TOKEN = "BBUS-gjDIrL1Jl5EoKpzlxloRt0qcgRaJTJ"  # <- ¡Reemplaza esto!
+UBIDOTS_DEVICE_LABEL = "pepelepew"
+UBIDOTS_TOPIC_LED_CONTROL = "/v1.6/devices/pepelepew/control_alarma"  # Topic desde Ubidots
+
+# Función para insertar datos en SQLite
+def insertar_datos(distancia=None, lluvia=None):
+    conn = sqlite3.connect(DB_NAME)
+    cursor = conn.cursor()
+    if distancia is not None and lluvia is None:
+        cursor.execute("INSERT INTO lecturas (distancia) VALUES (?)", (distancia,))
+        print(f"[{datetime.now()}] Guardado: {distancia} cm")
+    elif lluvia is not None and distancia is None:
+        cursor.execute("INSERT INTO lecturas (lluvia) VALUES (?)", (lluvia,))
+        print(f"[{datetime.now()}] Guardado: {lluvia}")
+    conn.commit()
+    conn.close()
+
+# Función para enviar datos a Ubidots
+def enviar_a_ubidots(distancia=None, lluvia=None):
+    topic = f"/v1.6/devices/{UBIDOTS_DEVICE_LABEL}"
+    payload = {}
+
+    if distancia is not None:
+        payload["distancia"] = {"value": distancia}
+
+    if lluvia is not None:
+        # Transformar la lluvia en un valor numérico basado en el texto
+        lluvia_value = procesar_lluvia(lluvia)  # Obtiene el valor numérico
+        if lluvia_value is not None:  # Solo si el valor numérico es válido
+            payload["lluvia"] = {
+                "value": lluvia_value,  # Valor numérico obligatorio
+                "context": {"descripcion": lluvia}  # Texto adicional
+            }
+
+    try:
+        publish.single(
+            topic,
+            json.dumps(payload),
+            hostname=UBIDOTS_BROKER,
+            port=UBIDOTS_PORT,
+            auth={"username": UBIDOTS_TOKEN, "password": ""},
+            retain=False
+        )
+        print(f"[{datetime.now()}] Enviado a Ubidots: {json.dumps(payload)}")
+    except Exception as e:
+        print("❌ Error al enviar a Ubidots:", e)
+
+# Función para procesar valores de lluvia
+def procesar_lluvia(lluvia):
+    # Asigna valores numéricos según el texto recibido
+    if lluvia == "No hay lluvia":
+        return 0
+    elif lluvia == "Lluvia mediana :|":
+        return 1
+    elif lluvia == "Lluvia re fuerte :(":
+        return 2
+    else:
+        print(f"❌ Advertencia: Descripción de lluvia desconocida -> {lluvia}")
+        return None  # Retorna None si el texto no coincide con los casos definidos
+
+# Función para manejar el control del LED
+def reenviar_comando_led(comando):
+    try:
+        publish.single(
+            LOCAL_MQTT_TOPIC_LED,
+            comando,
+            hostname=LOCAL_MQTT_BROKER,
+            retain=False
+        )
+        print(f"[{datetime.now()}] Comando LED reenviado a ESP32: {comando}")
+    except Exception as e:
+        print("❌ Error al reenviar el comando LED:", e)
+
+# Función de conexión MQTT
+def on_connect(client, userdata, flags, rc):
+    print("Conectado al broker MQTT local con código", rc)
+    client.subscribe([
+        (LOCAL_MQTT_TOPIC_NIVEL, 0),
+        (LOCAL_MQTT_TOPIC_LLUVIA, 0),
+        (UBIDOTS_TOPIC_LED_CONTROL, 0)  # Suscribirse al control del LED desde Ubidots
+    ])
+
+# Función para manejar mensajes MQTT
+def on_message(client, userdata, msg):
+    try:
+        payload = msg.payload.decode()
+
+        if msg.topic == LOCAL_MQTT_TOPIC_NIVEL:
+            # Procesar nivel (numérico)
+            try:
+                distancia = float(payload)  # Convertir a float
+                insertar_datos(distancia=distancia)
+                enviar_a_ubidots(distancia=distancia)
+            except ValueError:
+                print(f"❌ Error: Valor de nivel no numérico -> {payload}")
+
+        elif msg.topic == LOCAL_MQTT_TOPIC_LLUVIA:
+            # Procesar lluvia (texto)
+            lluvia = payload.strip()  # Eliminar espacios
+            insertar_datos(lluvia=lluvia)
+            enviar_a_ubidots(lluvia=lluvia)
+
+        elif msg.topic == UBIDOTS_TOPIC_LED_CONTROL:
+            # Controlar LED (comando desde Ubidots)
+            print(f"Comando de LED recibido desde Ubidots: {payload}")
+            reenviar_comando_led(payload)  # Reenviar a la ESP32
+
+    except json.JSONDecodeError:
+        print(f"❌ Error: Payload no es JSON válido -> {msg.payload}")
+    except Exception as e:
+        print("❌ Error al procesar el mensaje:", e)
+
+# Configuración y bucle MQTT
+client = mqtt.Client()
+client.on_connect = on_connect
+client.on_message = on_message
+
+client.connect(LOCAL_MQTT_BROKER, 1883, 60)
+client.loop_forever()
+```
+
+### Código fuente - ESP32
 
 ```cpp
 #include <WiFi.h>
 #include <WebServer.h>
+#include <PubSubClient.h>
 
 const char* ssid = "REALME";
 const char* password = "IoTplsdeja";
+
+// MQTT Broker
+const char* mqtt_server = "192.168.38.84";
+
+WiFiClient espClient;
+PubSubClient client(espClient);
 
 #define RAIN_SENSOR_PIN 34
 #define LED_PIN 2
@@ -167,7 +318,7 @@ const char* password = "IoTplsdeja";
 const float water_level = 10.0;
 int isRaining = 100;
 int value = 1000;
-bool alarmaActiva = true; 
+bool alarmaActiva = true;
 
 WebServer server(80);
 
@@ -206,63 +357,7 @@ void verificarBuzzer(float distancia) {
 }
 
 void handleRoot() {
-    String html = "<html><head>";
-    html += "<meta http-equiv='refresh' content='2'>";
-    html += "<style>";
-    html += "body { font-family: Arial, sans-serif; background-color: #e0f7fa; margin: 0; padding: 0; }";
-    html += "h1 { background-color: #0288d1; color: white; padding: 20px; margin: 0; text-align: center; }";
-    html += "p { font-size: 1.5rem; color: #333; }"; 
-    html += "button { background-color: #4caf50; color: white; border: none; padding: 10px 20px; font-size: 1.1rem; border-radius: 5px; margin: 10px; cursor: pointer; }";
-    html += "button:hover { background-color: #45a049; }"; 
-    html += "table { width: 80%; margin: 20px auto; border-collapse: collapse; background-color: white; border: 1px solid #ccc; }"; 
-    html += "th, td { padding: 15px; text-align: center; border: 1px solid #ccc; }"; 
-    html += "th { background-color: #0288d1; color: white; }"; 
-    html += "tr:nth-child(even) { background-color: #f2f2f2; }"; 
-    html += "</style>";
-    html += "</head><body>";
-
-    html += "<h1>Datos del Sensor - Sistema de Alerta</h1>";
-
-    html += "<div style='text-align:center; padding: 20px;'>";
-    html += "<p><strong>Distancia:</strong> " + String(distanciaActual) + " cm</p>";
-    html += "<p><strong>Estado de lluvia:</strong> " + lluviaActual + "</p>";
-
-    if (distanciaActual <= water_level) {
-        if (lluviaActual == "Lluvia re fuerte :(" || lluviaActual == "Lluvia mas o menos :|") {
-            html += "<h2 style='color: red;'>Inundacion por lluvias intensas</h2>";
-        } else {
-            html += "<h2 style='color: orange;'>Inundacion por otras razones </h2>";
-        }
-    } else {
-        html += "<h2 style='color: green;'>No hay riesgo de inundacion</h2>";
-    }
-
-    html += "<button onclick=\"apagarAlarma()\">Apagar Alarma</button>";
-    html += "<button onclick=\"encenderAlarma()\">Encender Alarma</button>";
-    html += "</div>";
-
-    html += "<script>";
-    html += "function apagarAlarma() { fetch('/apagar'); alert('Alarma desactivada.'); }";
-    html += "function encenderAlarma() { fetch('/encender'); alert('Alarma activada.'); }";
-    html += "</script>";
-
-    html += "<h2 style='text-align: center;'>Historico de Datos</h2>";
-    html += "<table>";
-    html += "<tr><th>Numero</th><th>Distancia (cm)</th><th>Estado de Lluvia</th></tr>";
-
-    for (int i = 0; i < HISTORICO_SIZE; i++) {
-        int index = (historicoIndex + i) % HISTORICO_SIZE;
-        html += "<tr>";
-        html += "<td>" + String(i + 1) + "</td>";
-        html += "<td>" + (historicoDistancias[index] != 0.0 ? String(historicoDistancias[index], 2) : "N/A") + "</td>";
-        html += "<td>" + (historicoLluvia[index] != "" ? historicoLluvia[index] : "N/A") + "</td>";
-        html += "</tr>";
-    }
-
-    html += "</table>";
-    html += "</body></html>";
-
-    server.send(200, "text/html", html);
+    // Página web (no modificado)
 }
 
 void handleApagar() {
@@ -275,6 +370,79 @@ void handleEncender() {
     alarmaActiva = true;
     Serial.println("Alarma encendida desde la página web.");
     server.send(200, "text/plain", "Alarma activada.");
+}
+
+void reconnect() {
+    while (!client.connected()) {
+        Serial.print("Conectando a MQTT...");
+        if (client.connect("ESP32Client")) {
+            Serial.println("conectado!");
+            client.subscribe("esp32/alarma_control"); // Suscribirse al topic de control de alarma
+        } else {
+            Serial.print("falló, rc=");
+            Serial.print(client.state());
+            Serial.println(" intentando de nuevo en 5 segundos");
+            delay(5000);
+        }
+    }
+}
+
+void publicarDatos() {
+    String distString = String(distanciaActual, 2);
+    String lluviaString = lluviaActual;
+
+    client.publish("fraterniu/sensor/distancia", distString.c_str());
+    client.publish("rio/lluvia", lluviaString.c_str());
+    client.publish("rio/nivel", distString.c_str()); // NUEVO TOPIC
+}
+
+void tareaMedirDistancia(void* parameter) {
+    for (;;) {
+        distanciaActual = medirDistancia();
+        verificarBuzzer(distanciaActual);
+        agregarAlHistorico(distanciaActual, lluviaActual);
+        publicarDatos();
+        delay(1000);
+    }
+}
+
+void tareaCheckRain(void* parameter) {
+    for (;;) {
+        value = analogRead(RAIN_SENSOR_PIN);
+        if (value < 300) isRaining = true;
+        else isRaining = false;
+
+        lluviaActual = (value < 1600) ? "Lluvia re fuerte :(" : (value < 2800) ? "Lluvia mediana :|" : "No hay lluvia";
+        digitalWrite(LED_PIN, isRaining);
+        delay(100);
+    }
+}
+
+void callback(char* topic, byte* payload, unsigned int length) {
+    String message;
+    for (int i = 0; i < length; i++) {
+        message += (char)payload[i];
+    }
+    Serial.println("Mensaje recibido en el topic: " + String(topic));
+    Serial.println("Payload: " + message);
+
+    if (String(topic) == "esp32/control_alarma") {
+        if (message == "0") {
+            alarmaActiva = false; // Apaga la alarma
+            Serial.println("Alarma desactivada por MQTT.");
+        } else if (message == "1") {
+            alarmaActiva = true; // Enciende la alarma
+            Serial.println("Alarma activada por MQTT.");
+        }
+    }
+}
+
+void loop() {
+    if (!client.connected()) {
+        reconnect();
+    }
+    client.loop();
+    server.handleClient();
 }
 
 void setup() {
@@ -294,37 +462,15 @@ void setup() {
     Serial.println("\nConectado a WiFi!");
     Serial.println(WiFi.localIP());
 
+    client.setServer(mqtt_server, 1883);
+    client.setCallback(callback); // Configuración del callback
+
     server.on("/", handleRoot);
     server.on("/apagar", handleApagar);
     server.on("/encender", handleEncender);
     server.begin();
 
-    xTaskCreate(tareaMedirDistancia, "MedirDistancia", 1000, NULL, 1, NULL);
-    xTaskCreate(tareaCheckRain, "CheckRain", 1000, NULL, 1, NULL);
-}
-
-void tareaMedirDistancia(void* parameter) {
-    for (;;) {
-        distanciaActual = medirDistancia();
-        verificarBuzzer(distanciaActual);
-        agregarAlHistorico(distanciaActual, lluviaActual);
-        delay(500);
-    }
-}
-
-void tareaCheckRain(void* parameter) {
-    for (;;) {
-        value = analogRead(RAIN_SENSOR_PIN);
-        if (value < 300) isRaining = true;
-        else isRaining = false;
-
-        lluviaActual = (value < 1600) ? "Lluvia re fuerte :(" : (value < 2800) ? "Lluvia mas o menos :|" : "No hay lluvia";
-        digitalWrite(LED_PIN, isRaining);
-        delay(100);
-    }
-}
-
-void loop() {
-    server.handleClient();
+    xTaskCreate(tareaMedirDistancia, "MedirDistancia", 4096, NULL, 1, NULL);
+    xTaskCreate(tareaCheckRain, "CheckRain", 4096, NULL, 1, NULL);
 }
 ```
