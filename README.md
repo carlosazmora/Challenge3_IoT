@@ -48,7 +48,7 @@ Para la demostración de la solución, se tomó como referencia el estrecho del 
 
 ## Restricciones de diseño identificadas
 
-Una restricción técnica identificada en la fase de diseño consiste en la sensibilidad del cableado ante el flujo de líquidos en las condiciones actuales. Durante las pruebas físicas del montaje, hubo que manejar con especial cuidado el sensor de lluvia por su distintivo contacto con el agua, elemento eléctricamente riesgoso. Esto no sólo se limita a las pruebas de funcionamiento, sino que constituye toda una restricción de espacio si se considera la implementación a nivel masivo, teniendo en cuenta que proteger dispositivos eléctricos de condiciones climáticas extremas podría resultar costoso a nivel monetario y logístico. Otra restricción encontrada es la conectividad con el servidor web, ya que las redes universitarias, o las redes con algún espacio en el nombre presentaban problemas a la hora de intentar realizar la conexión. Sin la conexión no se pueden ver los datos en el servidor web, haciendo que el circuito no cumpla con su objetivo.
+Una restricción técnica identificada en la fase de diseño consiste en la sensibilidad del cableado ante el flujo de líquidos en las condiciones actuales. Durante las pruebas físicas del montaje, hubo que manejar con especial cuidado el sensor de lluvia por su distintivo contacto con el agua, elemento eléctricamente riesgoso. Esto no sólo se limita a las pruebas de funcionamiento, sino que constituye toda una restricción de espacio si se considera la implementación a nivel masivo, teniendo en cuenta que proteger dispositivos eléctricos de condiciones climáticas extremas podría resultar costoso a nivel monetario y logístico. Otra restricción encontrada es la conectividad con el servidor web, ya que las redes universitarias, o las redes con algún espacio en el nombre presentaban problemas a la hora de intentar realizar la conexión. Sin la conexión no se pueden ver comunicar los datos y no se podrían mandar a Ubidots, haciendo que la solución no cumpla con su objetivo.
 
 ---
 
@@ -63,6 +63,10 @@ Una restricción técnica identificada en la fase de diseño consiste en la sens
 
 - **ESP32**: Se utilizo un ESP32 debido a su capacidad de conectarse con una red WiFi y de permitir conectar los sensores necesarios para la práctica, además de permitir alojar un servidor web que muestre los datos recolectados de los sensores.
 
+### Gateway
+
+- **Raspberry Pi**: Se utilizo una Raspberry Pi 5 como Gateway ya que permitía recibir los datos recolectados por la ESP32 y los mandaba a Ubidots, esto utilizando MQTT.
+
 ### Actuadores
 
 - **LED de alerta**: Este LED fue utilizado con el propósito de mostrar una advertencia cuando se sienta que está lloviendo en cantidades medianas/fuertes. Permite ayudar al cliente a estar alerta una vez se encienda el LED.
@@ -70,7 +74,7 @@ Una restricción técnica identificada en la fase de diseño consiste en la sens
 
 ### Dashboard
 
-- **Servidor web embebido**: Se utilizo un servidor web embebido que se implementó mediante la ESP32 permitiendo la gestión de una interfaz web que muestra datos recolectados por los sensores en tiempo real.
+- **Ubidots**: Se utilizó la plataforma Ubidots, siguiendo las recomendaciones del docente y aprocevhando que permite su uso de manera gratuita usando las credenciales institucionales. Dicha plataforma permite alojar el dashboard en la nube, y su facilidad de uso ayuda a la hora de comunicar los datos y mostrarlos en pantalla. 
 
 ---
 
