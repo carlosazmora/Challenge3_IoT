@@ -34,7 +34,7 @@ Se considera favorable una solución tecnológica basada en Internet de las Cosa
 ---
 
 ## Solucion propuesta
-![](https://github.com/Espiti88/Challenge-2-IoT/blob/main/SolucionPropuesta.png)
+![](https://github.com/Espiti88/Challenge-2-IoT/blob/main/SolucionPropuesta.jpg)
 **Figura 1. Diagrama de bloques sobre la arquitectura de la solución IoT**
 
 El presente diagrama permite visualizar la división de módulos en que se compone la solución IoT propuesta. Consiste, principalmente, en 3 capas dedicadas a la recolección de datos, procesamiento y actuación a partir de dicha información. La primera de ellas, la capa de recolección de información a partir del entorno se compone de un sensor **HC-SR04**, un ultrasónico que permite cuantificar distancias [1], empleado para medir la lejanía entre el nivel del agua y los límites definidos como permitidos, junto con un ‘raindrop sensor module’ [2], los cuales en este caso permiten determinar si la fuerza de la lluvia es algún signo de peligro de crecimiento en los niveles del agua o si la lluvia está siendo moderada. Los datos son recibidos y procesados mediante una **ESP32**, la cual envía los datos a la una Raspberry Pi que actúa como **MQTT Gateway** [3], y estos datos son enviados a **Ubidots**, la plataforma donde el dashboard que contiene la información está alojado. Por último, se tiene el **Buzzer**, el cual es la alarma que suena una vez el agua alcanza o sobrepasa los limites dispuestos con la medición. Este buzzer puede ser activado y desactivado desde el dashboard. 
